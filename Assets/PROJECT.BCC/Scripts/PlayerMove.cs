@@ -10,23 +10,36 @@ namespace BCC
     {
         NavMeshAgent agent;
 
+        private Animator animator;
+        private float animationBlend;
+
         private void Awake()
         {
             agent = GetComponent<NavMeshAgent>();
+            animator = GetComponentInChildren<Animator>();
         }
 
         private void Update()
         {
-            if(Input.GetKey(KeyCode.Mouse1))
-            {
-               Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            move();
+            animator.SetFloat("speed", animationBlend);
 
-                if(Physics.Raycast(ray, out RaycastHit hit))
-                {
-                    agent.SetDestination(hit.point);
-                }
-            }
         }
 
+        void move()
+        {
+            if (Input.GetKey(KeyCode.Mouse1))
+            {
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+                if (Physics.Raycast(ray, out RaycastHit hit))
+                {
+                    agent.SetDestination(hit.point);
+
+                }
+
+                //Todo: Click Animation
+            }
+        }
     }
 }
