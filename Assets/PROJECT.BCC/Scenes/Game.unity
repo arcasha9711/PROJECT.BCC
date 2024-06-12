@@ -910,6 +910,7 @@ GameObject:
   - component: {fileID: 1716782127}
   - component: {fileID: 1716782128}
   - component: {fileID: 1716782129}
+  - component: {fileID: 1716782130}
   m_Layer: 0
   m_Name: BCC.Player
   m_TagString: Player
@@ -996,6 +997,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   navMeshAgent: {fileID: 1716782128}
   selectStateUI: {fileID: 1236626803}
+--- !u!95 &1716782130
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1716782124}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1b4524d3c5d05014b8d0ac063df300a0, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &2033860537
 GameObject:
   m_ObjectHideFlags: 0
@@ -5780,7 +5802,7 @@ Animator:
   m_GameObject: {fileID: 4062092226601384946}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: dd6ec75974b69a3409711f8110698bbb, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1b4524d3c5d05014b8d0ac063df300a0, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -5923,7 +5945,7 @@ SceneRoots:
   - {fileID: 1398365274}
   - {fileID: 1158412980}
   - {fileID: 1572479376}
-  - {fileID: 2033860538}
-  - {fileID: 1716782125}
   - {fileID: 318651101}
   - {fileID: 567518098973860378}
+  - {fileID: 2033860538}
+  - {fileID: 1716782125}
