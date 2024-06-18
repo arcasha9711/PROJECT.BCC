@@ -40,8 +40,6 @@ namespace SCU
             // Selection Box Update - (Dragging)
             if (Input.GetKey(KeyCode.Mouse0))
             {
-                //Todo: Anim add
-                
                 Vector2 currentPosition = Input.mousePosition;
                 float width = currentPosition.x - startClickPosition.x;
                 float height = currentPosition.y - startClickPosition.y;
@@ -68,9 +66,9 @@ namespace SCU
             Vector2 min = selectionBox.anchoredPosition - (selectionBox.sizeDelta / 2);
             Vector2 max = selectionBox.anchoredPosition + (selectionBox.sizeDelta / 2);
 
-            //1. í”¼ë¼ë¯¸ë“œ í˜•íƒœë¡œ Castingì„ ë§Œë“¤ì–´ì„œ ë°”ê¿”ë³´ê¸°
-            //2. Physics.Cast ëœ ì˜¤ë¸Œì íŠ¸ë“¤ì—ê²Œì„œ ISelectable ì¸í„°í˜ì´ìŠ¤ ì»´í¬ë„ŒíŠ¸ë¥¼ ì°¾ì•„ì„œ ê°€ì ¸ì˜¤ê³ 
-            //3. ê¸°ì¡´ SelectDeslect í•¨ìˆ˜ë¥¼ ìˆ˜í–‰í•˜ê¸°
+            //1. ÇÇ¶ó¹Ìµå ÇüÅÂ·Î CastingÀ» ¸¸µé¾î¼­ ¹Ù²ãº¸±â
+            //2. Physics.Cast µÈ ¿ÀºêÁ§Æ®µé¿¡°Ô¼­ ISelectable ÀÎÅÍÆäÀÌ½º ÄÄÆ÷³ÍÆ®¸¦ Ã£¾Æ¼­ °¡Á®¿À°í
+            //3. ±âÁ¸ SelectDeslect ÇÔ¼ö¸¦ ¼öÇàÇÏ±â
             selectedCharacters.Clear();
             foreach (var character in SelectableCharacter.SpawnedCharacters)
             {
