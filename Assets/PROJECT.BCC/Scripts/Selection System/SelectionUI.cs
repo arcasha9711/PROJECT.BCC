@@ -19,6 +19,7 @@ namespace SCU
 
         private void Update()
         {
+            /*
             if (Input.GetKeyDown(KeyCode.Mouse1)) // Right Mouse Button Click
             {
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -30,6 +31,7 @@ namespace SCU
                     }
                 }
             }
+            */
 
 
             // Selection Box Start
