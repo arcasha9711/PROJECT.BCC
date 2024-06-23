@@ -606,8 +606,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 927f586169a347d4181b70bc35418362, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  navMeshAgent: {fileID: 1192270649}
-  animator: {fileID: 6050758805952905863}
   selectStateUI: {fileID: 1782855413}
 --- !u!195 &1192270649
 NavMeshAgent:
@@ -686,7 +684,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: deb11d48cc9746d4289a0f2c498c5bf2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movespeed: 3
+  moveSpeed: 3
+  sprintSpeed: 5
+  speedChangeRate: 10
 --- !u!1 &1236626803
 GameObject:
   m_ObjectHideFlags: 0
@@ -1088,8 +1088,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 927f586169a347d4181b70bc35418362, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  navMeshAgent: {fileID: 1628088055}
-  animator: {fileID: 6050758805952905863}
   selectStateUI: {fileID: 444013068}
 --- !u!195 &1628088055
 NavMeshAgent:
@@ -1168,7 +1166,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: deb11d48cc9746d4289a0f2c498c5bf2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movespeed: 3
+  moveSpeed: 3
+  sprintSpeed: 5
+  speedChangeRate: 10
 --- !u!1 &1664252328
 GameObject:
   m_ObjectHideFlags: 0
@@ -1338,8 +1338,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 927f586169a347d4181b70bc35418362, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  navMeshAgent: {fileID: 1716782128}
-  animator: {fileID: 4062092226608630074}
   selectStateUI: {fileID: 1236626803}
 --- !u!114 &1716782130
 MonoBehaviour:
@@ -1353,7 +1351,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: deb11d48cc9746d4289a0f2c498c5bf2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movespeed: 3
+  moveSpeed: 3
+  sprintSpeed: 5
+  speedChangeRate: 10
 --- !u!1 &1782855413
 GameObject:
   m_ObjectHideFlags: 0
