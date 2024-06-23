@@ -1089,7 +1089,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   navMeshAgent: {fileID: 1628088055}
-  animator: {fileID: 0}
+  animator: {fileID: 6050758805952905863}
   selectStateUI: {fileID: 444013068}
 --- !u!195 &1628088055
 NavMeshAgent:
