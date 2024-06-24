@@ -3,22 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-namespace SCU
+namespace BCC
 {
     public class SelectableCharacter : MonoBehaviour, ISelectable
     {
         public static List<SelectableCharacter> SpawnedCharacters = new List<SelectableCharacter>();
 
         public GameObject Selection => selectStateUI;
-       // public NavMeshAgent navMeshAgent;
-       // public Animator animator;
+        public NavMeshAgent navMeshAgent;
+        public Animator animator;
 
         public GameObject selectStateUI;
 
         private void Awake()
         {
             SpawnedCharacters.Add(this);
-            //animator = GetComponentInChildren<Animator>();
+            animator = GetComponentInChildren<Animator>();
         }
 
         private void OnDestroy()
@@ -38,11 +38,11 @@ namespace SCU
 
         public void SetDestination(Vector3 targetDestination)
         {
-           // navMeshAgent.SetDestination(targetDestination);
+           navMeshAgent.SetDestination(targetDestination);
         }
         private void Update()
         {
-            /*if (navMeshAgent.velocity != Vector3.zero)
+            if (navMeshAgent.velocity != Vector3.zero)
             {
                 Vector3 localVelocity = transform.InverseTransformDirection(navMeshAgent.velocity);
                 animator.SetFloat("Horizontal", localVelocity.x);
@@ -53,7 +53,7 @@ namespace SCU
                 animator.SetFloat("Horizontal", 0);
                 animator.SetFloat("Vertical", 0);
             }
-            */
+            
         }
     }
 }
