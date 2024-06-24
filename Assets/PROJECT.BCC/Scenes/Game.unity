@@ -684,9 +684,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: deb11d48cc9746d4289a0f2c498c5bf2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 3
-  sprintSpeed: 5
-  speedChangeRate: 10
+  navMeshAgent: {fileID: 1192270649}
+  animator: {fileID: 1945150418471696966}
+  movespeed: 3
 --- !u!1 &1236626803
 GameObject:
   m_ObjectHideFlags: 0
@@ -1166,9 +1166,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: deb11d48cc9746d4289a0f2c498c5bf2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 3
-  sprintSpeed: 5
-  speedChangeRate: 10
+  navMeshAgent: {fileID: 1628088055}
+  animator: {fileID: 6050758805952905863}
+  movespeed: 3
 --- !u!1 &1664252328
 GameObject:
   m_ObjectHideFlags: 0
@@ -1269,7 +1269,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1716782124}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1351,9 +1351,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: deb11d48cc9746d4289a0f2c498c5bf2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 3
-  sprintSpeed: 5
-  speedChangeRate: 10
+  navMeshAgent: {fileID: 1716782128}
+  animator: {fileID: 4062092226608630074}
+  movespeed: 3
 --- !u!1 &1782855413
 GameObject:
   m_ObjectHideFlags: 0
