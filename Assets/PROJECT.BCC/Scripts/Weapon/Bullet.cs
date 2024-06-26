@@ -14,6 +14,11 @@ namespace BCC
             {
                 Destroy(gameObject, 3);
             }
+            
+            if(collision.gameObject.tag == "Floor")
+            {
+                Destroy(gameObject, 3);
+            }
 
             //다른 것
         }

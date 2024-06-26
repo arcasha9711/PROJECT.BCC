@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
 using UnityEngine;
 
 namespace BCC
@@ -19,7 +18,6 @@ namespace BCC
 
         private void Update()
         {
-            
             if (Input.GetKeyDown(KeyCode.Mouse1)) // Right Mouse Button Click
             {
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -31,8 +29,6 @@ namespace BCC
                     }
                 }
             }
-            
-
 
             // Selection Box Start
             if (Input.GetKeyDown(KeyCode.Mouse0))
@@ -47,25 +43,24 @@ namespace BCC
                 float width = currentPosition.x - startClickPosition.x;
                 float height = currentPosition.y - startClickPosition.y;
 
-                selectionBox.anchoredPosition =
-                    new Vector2(startClickPosition.x, startClickPosition.y) + new Vector2(width, height) / 2f;
-
+                selectionBox.anchoredPosition = startClickPosition + new Vector2(width, height) / 2f;
                 selectionBox.sizeDelta = new Vector2(Mathf.Abs(width), Mathf.Abs(height));
             }
 
             // Execute - Selection Order
             if (Input.GetKeyUp(KeyCode.Mouse0))
             {
-                // To do : Select Order !
-                Select();
+                if (selectionBox.sizeDelta.magnitude < 10f) // If the box is too small, it's considered a click
+                {
+                    ClickSelect();
+                }
+                else
+                {
+                    Select();
+                }
 
                 startClickPosition = Vector3.zero;
                 selectionBox.sizeDelta = Vector2.zero;
-            }
-
-            if (Input.GetKey(KeyCode.Mouse0))
-            {
-                Select();
             }
         }
 
@@ -74,9 +69,6 @@ namespace BCC
             Vector2 min = selectionBox.anchoredPosition - (selectionBox.sizeDelta / 2);
             Vector2 max = selectionBox.anchoredPosition + (selectionBox.sizeDelta / 2);
 
-            //1. 피라미드 형태로 Casting을 만들어서 바꿔보기
-            //2. Physics.Cast 된 오브젝트들에게서 ISelectable 인터페이스 컴포넌트를 찾아서 가져오고
-            //3. 기존 SelectDeslect 함수를 수행하기
             selectedCharacters.Clear();
             foreach (var character in SelectableCharacter.SpawnedCharacters)
             {
@@ -91,6 +83,34 @@ namespace BCC
                 else
                 {
                     character.Deselect();
+                }
+            }
+        }
+
+        public void ClickSelect()
+        {
+            Vector2 clickPosition = Input.mousePosition;
+            Ray ray = Camera.main.ScreenPointToRay(clickPosition);
+
+            if (Physics.Raycast(ray, out RaycastHit hit, 1000f))
+            {
+                SelectableCharacter character = hit.collider.GetComponent<SelectableCharacter>();
+
+                if (character != null)
+                {
+                    selectedCharacters.Clear();
+                    foreach (var ch in SelectableCharacter.SpawnedCharacters)
+                    {
+                        if (ch == character)
+                        {
+                            ch.Select();
+                            selectedCharacters.Add(ch);
+                        }
+                        else
+                        {
+                            ch.Deselect();
+                        }
+                    }
                 }
             }
         }
