@@ -55,5 +55,10 @@ namespace BCC
             }
             
         }
+
+        void Enemyselect()
+        {
+            //ToDo: 적 클릭시에 select가 되도록 
+        }
     }
 }

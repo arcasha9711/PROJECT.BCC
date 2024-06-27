@@ -10,17 +10,8 @@ namespace BCC
 
         private void OnCollisionEnter(Collision collision)
         {
-            if(collision.gameObject.tag == "Wall")
-            {
-                Destroy(gameObject, 3);
-            }
-            
-            if(collision.gameObject.tag == "Floor")
-            {
-                Destroy(gameObject, 3);
-            }
+                Destroy(gameObject, 2);
 
-            //다른 것
         }
     }
 }
