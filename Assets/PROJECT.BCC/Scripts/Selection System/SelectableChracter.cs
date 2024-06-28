@@ -42,6 +42,7 @@ namespace BCC
         }
         private void Update()
         {
+            //클릭시 움직이는 애니메이션
             if (navMeshAgent.velocity != Vector3.zero)
             {
                 Vector3 localVelocity = transform.InverseTransformDirection(navMeshAgent.velocity);
@@ -52,6 +53,12 @@ namespace BCC
             {
                 animator.SetFloat("Horizontal", 0);
                 animator.SetFloat("Vertical", 0);
+            }
+
+            //총쏘는 애니메이션
+            if(Input.GetKeyDown(KeyCode.Mouse0))
+            {
+                animator.SetTrigger("doShot");
             }
             
         }

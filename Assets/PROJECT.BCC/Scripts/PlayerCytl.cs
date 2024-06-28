@@ -11,6 +11,8 @@ namespace BCC
         public Transform bulletPos;
         public GameObject bullet;
 
+       
+
         private void Update()
         {
             if (Input.GetMouseButtonDown(0))
