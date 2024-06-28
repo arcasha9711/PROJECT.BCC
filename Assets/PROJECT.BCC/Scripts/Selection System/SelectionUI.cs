@@ -18,7 +18,7 @@ namespace BCC
 
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Mouse1)) // Right Mouse Button Click
+            if (Input.GetKeyDown(KeyCode.Mouse1))
             {
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 if (Physics.Raycast(ray, out RaycastHit hit, 1000f))
