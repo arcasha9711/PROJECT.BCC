@@ -59,13 +59,25 @@ namespace BCC
             if(Input.GetKeyDown(KeyCode.Mouse0))
             {
                 animator.SetTrigger("doShot");
-            }
-            
+            }                        
         }
 
-        void Enemyselect()
+        public void TargetEnemy(GameObject enemy)
         {
-            //ToDo: 적 클릭시에 select가 되도록 
+            // 기존 선택 상태를 비활성화
+            Deselect();
+
+            // Enemy_Selection 활성화
+            Enemy_Selection enemySelection = enemy.GetComponent<Enemy_Selection>();
+            if (enemySelection != null)
+            {
+                enemySelection.Activate();
+            }
+
+            // 적을 향해 회전하고 공격 애니메이션을 재생합니다.
+            Vector3 direction = (enemy.transform.position - transform.position).normalized;
+            transform.LookAt(new Vector3(enemy.transform.position.x, transform.position.y, enemy.transform.position.z));
+            animator.SetTrigger("doShot");
         }
     }
 }
