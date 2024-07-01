@@ -4,9 +4,11 @@ using UnityEngine;
 
 namespace BCC
 {
-    public class Enemy : MonoBehaviour
+    public class Enemy : MonoBehaviour, ISelectable
     {
         public GameObject SelectionUI;
+
+        public GameObject Selection => throw new System.NotImplementedException();
 
         private void Awake()
         {

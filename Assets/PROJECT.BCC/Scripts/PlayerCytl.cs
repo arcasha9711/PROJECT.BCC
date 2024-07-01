@@ -10,19 +10,15 @@ namespace BCC
         public Type type;
         public Transform bulletPos;
         public GameObject bullet;
-        public GameObject target;
-        public Transform enemy;
-
-       
+  
 
         private void Update()
         {
             if (Input.GetMouseButtonDown(0))
             {
+                //Todo: 조건 하나 걸기 ※캐릭터가 선택되어있을 때에만 총알이 나가도록 설정
                 Attack();
             }
-
-            transform.LookAt(enemy);
         }
 
         public void Attack()
@@ -33,11 +29,6 @@ namespace BCC
             }
         }
 
-        public void LookAt()
-        {
-            Vector3 vector = target.transform.position - transform.position;
-            transform.rotation = Quaternion.LookRotation(vector).normalized;
-        }
 
 
         IEnumerator Shot()
