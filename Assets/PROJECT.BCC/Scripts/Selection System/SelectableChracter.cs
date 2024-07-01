@@ -15,6 +15,8 @@ namespace BCC
 
         public GameObject selectStateUI;
 
+        private GameObject currentTarget;
+
         private void Awake()
         {
             SpawnedCharacters.Add(this);
@@ -29,6 +31,14 @@ namespace BCC
         public void Deselect()
         {
             Selection.gameObject.SetActive(false);
+            if (currentTarget != null)
+            {
+                var enemy = currentTarget.GetComponent<Enemy>();
+                if (enemy != null)
+                {
+                    enemy.Deselect();
+                }
+            }
         }
 
         public void Select()
@@ -40,9 +50,20 @@ namespace BCC
         {
             navMeshAgent.SetDestination(targetDestination);
         }
+
+        public void SetTarget(GameObject enemy)
+        {
+            currentTarget = enemy;
+            var enemyScript = enemy.GetComponent<Enemy>();
+            if (enemyScript != null)
+            {
+                enemyScript.Select();
+            }
+        }
+
         private void Update()
         {
-            //클릭시 움직이는 애니메이션
+            // 움직이는 애니메이션
             if (navMeshAgent.velocity != Vector3.zero)
             {
                 Vector3 localVelocity = transform.InverseTransformDirection(navMeshAgent.velocity);
@@ -55,10 +76,15 @@ namespace BCC
                 animator.SetFloat("Vertical", 0);
             }
 
-            //총쏘는 애니메이션
-            if (Input.GetKeyDown(KeyCode.Mouse0))
+            // 공격 애니메이션
+            if (currentTarget != null)
             {
-                animator.SetTrigger("doShot");
+                float distance = Vector3.Distance(transform.position, currentTarget.transform.position);
+                if (distance <= navMeshAgent.stoppingDistance)
+                {
+                    // 적을 공격
+                    animator.SetTrigger("doShot");
+                }
             }
         }
 
@@ -67,11 +93,6 @@ namespace BCC
             Vector3 direction = (enemy.transform.position - transform.position).normalized;
             transform.LookAt(new Vector3(enemy.transform.position.x, transform.position.y, enemy.transform.position.z));
             animator.SetTrigger("doShot");
-        }
-
-        public void EnemySelect()
-        {
-            //적 선택
         }
     }
 }

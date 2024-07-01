@@ -23,20 +23,31 @@ namespace BCC
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 if (Physics.Raycast(ray, out RaycastHit hit, 1000f))
                 {
-                    for (int i = 0; i < selectedCharacters.Count; i++)
+                    if (hit.collider.CompareTag("Enemy"))
                     {
-                        selectedCharacters[i].SetDestination(hit.point);
+                        GameObject enemy = hit.collider.gameObject;
+                        foreach (var character in selectedCharacters)
+                        {
+                            character.SetTarget(enemy);
+                        }
+                    }
+                    else
+                    {
+                        foreach (var character in selectedCharacters)
+                        {
+                            character.SetDestination(hit.point);
+                        }
                     }
                 }
             }
 
-            // Selection Box Start
+            // 선택 박스 시작
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
                 startClickPosition = Input.mousePosition;
             }
 
-            // Selection Box Update - (Dragging)
+            // 선택 박스 업데이트 - 드래그 중
             if (Input.GetKey(KeyCode.Mouse0))
             {
                 Vector2 currentPosition = Input.mousePosition;
@@ -47,10 +58,10 @@ namespace BCC
                 selectionBox.sizeDelta = new Vector2(Mathf.Abs(width), Mathf.Abs(height));
             }
 
-            // Execute - Selection Order
+            // 선택 명령 실행
             if (Input.GetKeyUp(KeyCode.Mouse0))
             {
-                if (selectionBox.sizeDelta.magnitude < 10f) // If the box is too small, it's considered a click
+                if (selectionBox.sizeDelta.magnitude < 10f) // 박스가 너무 작으면 클릭으로 간주
                 {
                     ClickSelect();
                 }
@@ -94,29 +105,37 @@ namespace BCC
 
             if (Physics.Raycast(ray, out RaycastHit hit, 1000f))
             {
-                SelectableCharacter character = hit.collider.GetComponent<SelectableCharacter>();
-
-                if (character != null)
+                // 적을 클릭했는지 확인
+                if (hit.collider.CompareTag("Enemy"))
                 {
-                    selectedCharacters.Clear();
-                    foreach (var ch in SelectableCharacter.SpawnedCharacters)
+                    GameObject enemy = hit.collider.gameObject;
+                    foreach (var character in selectedCharacters)
                     {
-                        if (ch == character)
+                        character.SetTarget(enemy);
+                    }
+                }
+                else
+                {
+                    SelectableCharacter character = hit.collider.GetComponent<SelectableCharacter>();
+
+                    if (character != null)
+                    {
+                        selectedCharacters.Clear();
+                        foreach (var ch in SelectableCharacter.SpawnedCharacters)
                         {
-                            ch.Select();
-                            selectedCharacters.Add(ch);
-                        }
-                        else
-                        {
-                            ch.Deselect();
+                            if (ch == character)
+                            {
+                                ch.Select();
+                                selectedCharacters.Add(ch);
+                            }
+                            else
+                            {
+                                ch.Deselect();
+                            }
                         }
                     }
                 }
             }
         }
-
-
-
-
     }
 }
