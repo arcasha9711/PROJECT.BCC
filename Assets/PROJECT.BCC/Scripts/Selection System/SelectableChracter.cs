@@ -59,6 +59,7 @@ namespace BCC
             {
                 enemyScript.Select();
             }
+            TargetEnemy(enemy);
         }
 
         private void Update()

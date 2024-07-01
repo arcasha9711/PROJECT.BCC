@@ -412,6 +412,7 @@ GameObject:
   - component: {fileID: 267737270}
   - component: {fileID: 267737272}
   - component: {fileID: 267737271}
+  - component: {fileID: 267737274}
   m_Layer: 0
   m_Name: BCC. Enemy(Rifle)
   m_TagString: Enemy
@@ -485,6 +486,19 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &267737274
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 267737269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcdfa8a774a622041a24d23148e04de5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SelectionUI: {fileID: 1274341678}
 --- !u!1 &278269882
 GameObject:
   m_ObjectHideFlags: 0
@@ -2288,6 +2302,8 @@ MonoBehaviour:
   type: 0
   bulletPos: {fileID: 1657460221}
   bullet: {fileID: 6298338120868742626, guid: 43b378dd5ab05ca43ac59b9166de3179, type: 3}
+  target: {fileID: 0}
+  enemy: {fileID: 0}
 --- !u!1 &1664252328
 GameObject:
   m_ObjectHideFlags: 0
@@ -2437,7 +2453,7 @@ NavMeshAgent:
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
-  m_AngularSpeed: 120
+  m_AngularSpeed: 360
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 0
   m_AutoBraking: 1
@@ -5988,8 +6004,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2613076921389643376}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.2262382, y: 0.65347004, z: 0.67614526, w: 0.2542064}
-  m_LocalPosition: {x: 0.373, y: 0.115, z: -0.27}
+  m_LocalRotation: {x: 0.7102926, y: 0.09380666, z: 0.6942476, w: -0.068594374}
+  m_LocalPosition: {x: 0.019, y: 0.043, z: 0.003}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -5998,7 +6014,7 @@ Transform:
   - {fileID: 2614783302366538968}
   - {fileID: 2618519538384980364}
   m_Father: {fileID: 6230138267723081276}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 193.161, y: -88.43298, z: -2.2380066}
 --- !u!4 &2618519538384980364
 Transform:
   m_ObjectHideFlags: 0

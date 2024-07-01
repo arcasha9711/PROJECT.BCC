@@ -10,6 +10,8 @@ namespace BCC
         public Type type;
         public Transform bulletPos;
         public GameObject bullet;
+        public GameObject target;
+        public Transform enemy;
 
        
 
@@ -19,6 +21,8 @@ namespace BCC
             {
                 Attack();
             }
+
+            transform.LookAt(enemy);
         }
 
         public void Attack()
@@ -28,6 +32,13 @@ namespace BCC
                 StartCoroutine(Shot());
             }
         }
+
+        public void LookAt()
+        {
+            Vector3 vector = target.transform.position - transform.position;
+            transform.rotation = Quaternion.LookRotation(vector).normalized;
+        }
+
 
         IEnumerator Shot()
         {
