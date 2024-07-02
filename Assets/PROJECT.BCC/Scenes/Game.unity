@@ -1465,7 +1465,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 0
+  m_StoppingDistance: 1
   m_AutoTraverseOffMeshLink: 0
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -2101,7 +2101,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 0
+  m_StoppingDistance: 1
   m_AutoTraverseOffMeshLink: 0
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -2302,8 +2302,6 @@ MonoBehaviour:
   type: 0
   bulletPos: {fileID: 1657460221}
   bullet: {fileID: 6298338120868742626, guid: 43b378dd5ab05ca43ac59b9166de3179, type: 3}
-  target: {fileID: 0}
-  enemy: {fileID: 0}
 --- !u!1 &1664252328
 GameObject:
   m_ObjectHideFlags: 0
@@ -2454,7 +2452,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 360
-  m_StoppingDistance: 0
+  m_StoppingDistance: 1
   m_AutoTraverseOffMeshLink: 0
   m_AutoBraking: 1
   m_AutoRepath: 1
