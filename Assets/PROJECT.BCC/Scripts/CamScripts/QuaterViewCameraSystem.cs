@@ -81,7 +81,7 @@ namespace BCC
             }
             else
             {
-                //UpdateScreenBorderCheck(cameraForward, cameraRight);
+                UpdateScreenBorderCheck(cameraForward, cameraRight);
             }            
         }
 
