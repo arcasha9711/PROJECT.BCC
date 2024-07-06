@@ -16,7 +16,7 @@ namespace BCC
         {
             if (Input.GetMouseButtonDown(0))
             {
-                //Todo: 조건 하나 걸기 ※캐릭터가 선택되어있을 때에만 총알이 나가도록 설정
+                //To do: 캐릭터가 선택 되고, 적에게 공격할 때에만 총알이 나가도록
                 Attack();
             }
         }
