@@ -10,6 +10,8 @@ namespace BCC
 
         public GameObject Selection => throw new System.NotImplementedException();
 
+        public System.Action OnCharacterDead;
+
         private void Awake()
         {
             SelectionUI.SetActive(false);
@@ -23,6 +25,11 @@ namespace BCC
         public void Deselect()
         {
             SelectionUI.SetActive(false);
+        }
+
+        private void OnDestroy()
+        {
+            OnCharacterDead?.Invoke();
         }
     }
 }

@@ -6,6 +6,8 @@ namespace BCC
 {
     public class QuaterViewCameraSystem : MonoBehaviour
     {
+        public Transform FollowTarget { get; set; } // Null
+
         public float cameraRotationSpeed = 3f;
         public float cameraMoveSpeed = 3f;
 
@@ -18,6 +20,38 @@ namespace BCC
 
         private void Update()
         {
+            bool isSomeoneSelect = false;
+            if (Input.GetKey(KeyCode.Alpha1))
+            {
+                // To do : 
+                // FollowTarget = Character01.transform;
+                var target = CharacterBase.AllCharacters.Find(x => x.CharacterID.Equals("Player_01"));
+                FollowTarget = target.transform;
+                isSomeoneSelect = true;
+            }
+
+            if (Input.GetKey(KeyCode.Alpha2))
+            {
+                // FollowTarget = Character02.transform;
+                var target = CharacterBase.AllCharacters.Find(x => x.CharacterID.Equals("Player_02"));
+                FollowTarget = target.transform;
+                isSomeoneSelect = true;
+            }
+
+            if (Input.GetKey(KeyCode.Alpha3))
+            {
+                // FollowTarget = Character03.transform;
+                var target = CharacterBase.AllCharacters.Find(x => x.CharacterID.Equals("Player_03"));
+
+                FollowTarget = target.transform;
+                isSomeoneSelect = true;
+            }
+
+            if (isSomeoneSelect == false)
+            {
+                FollowTarget = null;
+            }
+
             float rotateDirection = 0f;
             if (Input.GetKey(KeyCode.Q))
             {
@@ -41,6 +75,18 @@ namespace BCC
             cameraForward.y = 0;
             cameraRight.y = 0;
 
+            if (FollowTarget != null)
+            {
+                cameraPivot.position = FollowTarget.position;
+            }
+            else
+            {
+                UpdateScreenBorderCheck(cameraForward, cameraRight);
+            }            
+        }
+
+        private void UpdateScreenBorderCheck(Vector3 cameraForward, Vector3 cameraRight)
+        {
             // Mouse Screen Border Check 뷰포트
             Vector3 mousePosition = Input.mousePosition;
             Vector3 viewportMousePosition = mainCamera.ScreenToViewportPoint(mousePosition);
