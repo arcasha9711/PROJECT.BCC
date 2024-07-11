@@ -1280,6 +1280,37 @@ MonoBehaviour:
   m_CameraActivatedEvent:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1 &988913787
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 988913788}
+  m_Layer: 21
+  m_Name: Bullet Pos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &988913788
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 988913787}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.051, y: 0.6, z: 0.485}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1628088057}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1112716714
 GameObject:
   m_ObjectHideFlags: 0
@@ -2109,7 +2140,8 @@ GameObject:
   - component: {fileID: 1628088057}
   - component: {fileID: 1628088056}
   - component: {fileID: 1628088055}
-  - component: {fileID: 1628088054}
+  - component: {fileID: 1628088060}
+  - component: {fileID: 1628088059}
   - component: {fileID: 1628088058}
   m_Layer: 21
   m_Name: BCC.Player3
@@ -2118,21 +2150,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1628088054
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1628088052}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 927f586169a347d4181b70bc35418362, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  navMeshAgent: {fileID: 1628088055}
-  animator: {fileID: 6050758805952905863}
-  selectStateUI: {fileID: 444013068}
 --- !u!195 &1628088055
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -2197,6 +2214,7 @@ Transform:
   - {fileID: 4427776011869319165}
   - {fileID: 444013070}
   - {fileID: 1645845901}
+  - {fileID: 988913788}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1628088058
@@ -2212,6 +2230,37 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <CharacterID>k__BackingField: Player_03
+--- !u!114 &1628088059
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1628088052}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3beab48ce8f30c44d8d979c6dd374cfe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletPos: {fileID: 988913788}
+  bullet: {fileID: 6298338120868742626, guid: 43b378dd5ab05ca43ac59b9166de3179, type: 3}
+  bulletSpeed: 50
+  shootDelay: 1
+--- !u!114 &1628088060
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1628088052}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 927f586169a347d4181b70bc35418362, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  navMeshAgent: {fileID: 1628088055}
+  animator: {fileID: 6050758805952905863}
+  selectStateUI: {fileID: 444013068}
 --- !u!1 &1645845900
 GameObject:
   m_ObjectHideFlags: 0

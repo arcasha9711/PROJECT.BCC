@@ -14,7 +14,7 @@ namespace BCC
         private SelectableCharacter selectableCharacter;
 
         private void Awake()
-        {            
+        {
             selectableCharacter = transform.root.GetComponent<SelectableCharacter>();
         }
 
@@ -22,7 +22,6 @@ namespace BCC
         {
             if (Input.GetMouseButtonDown(0))
             {
-                // 캐릭터가 선택되고, 적에게 공격할 때에만 총알이 나가도록
                 if (selectableCharacter.IsSelected() && selectableCharacter.GetCurrentTarget() != null)
                 {
                     Attack();
@@ -49,4 +48,3 @@ namespace BCC
         }
     }
 }
-
