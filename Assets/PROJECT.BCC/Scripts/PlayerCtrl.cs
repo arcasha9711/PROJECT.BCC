@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace BCC
 {
@@ -10,15 +11,20 @@ namespace BCC
         public Type type;
         public Transform bulletPos;
         public GameObject bullet;
+        protected NavMeshAgent navMeshAgent;
+        protected Animator animator;
 
-        private SelectableCharacter selectableCharacter;
+        protected SelectableCharacter selectableCharacter;
+        private bool isAttacking = false;
 
-        private void Awake()
+        protected virtual void Awake()
         {
-            selectableCharacter = transform.root.GetComponent<SelectableCharacter>();
+            selectableCharacter = GetComponent<SelectableCharacter>();
+            navMeshAgent = GetComponent<NavMeshAgent>();
+            animator = GetComponentInChildren<Animator>();
         }
 
-        private void Update()
+        protected virtual void Update()
         {
             if (Input.GetMouseButtonDown(0))
             {
@@ -27,9 +33,44 @@ namespace BCC
                     Attack();
                 }
             }
+
+            HandleMovement();
         }
 
-        public void Attack()
+        protected void HandleMovement()
+        {
+            if (navMeshAgent == null) return;
+
+            if (navMeshAgent.isStopped && !isAttacking)
+            {
+                navMeshAgent.isStopped = false;
+            }
+
+            if (navMeshAgent.velocity != Vector3.zero)
+            {
+                Vector3 localVelocity = transform.InverseTransformDirection(navMeshAgent.velocity);
+                animator.SetFloat("Horizontal", localVelocity.x);
+                animator.SetFloat("Vertical", localVelocity.z);
+            }
+            else
+            {
+                animator.SetFloat("Horizontal", 0);
+                animator.SetFloat("Vertical", 0);
+            }
+
+            if (selectableCharacter.GetCurrentTarget() != null)
+            {
+                float distance = Vector3.Distance(transform.position, selectableCharacter.GetCurrentTarget().transform.position);
+                if (distance <= navMeshAgent.stoppingDistance)
+                {
+                    animator.SetTrigger("doShot");
+                    StopMoving();
+                    isAttacking = true;
+                }
+            }
+        }
+
+        public virtual void Attack()
         {
             if (type == Type.Range)
             {
@@ -37,14 +78,63 @@ namespace BCC
             }
         }
 
-        IEnumerator Shot()
+        protected virtual IEnumerator Shot()
         {
-            GameObject instantBullet = Instantiate(bullet, bulletPos.position, bulletPos.rotation); // 총알 발사
+            GameObject instantBullet = Instantiate(bullet, bulletPos.position, bulletPos.rotation);
 
             Rigidbody bulletRigid = instantBullet.GetComponent<Rigidbody>();
-            bulletRigid.velocity = bulletPos.forward * 50; // 탄속도
+            bulletRigid.velocity = bulletPos.forward * 50;
 
             yield return null;
+        }
+
+        public void SetDestination(Vector3 targetDestination)
+        {
+            if (selectableCharacter.GetCurrentTarget())
+            {
+                navMeshAgent.isStopped = false;
+            }
+
+            if (navMeshAgent != null)
+            {
+                navMeshAgent.SetDestination(targetDestination);
+            }
+        }
+
+        public void SetTarget(GameObject enemy)
+        {
+            TargetEnemy(enemy);
+        }
+
+        protected virtual void TargetEnemy(GameObject enemy)
+        {
+            Vector3 direction = (enemy.transform.position - transform.position).normalized;
+            transform.LookAt(new Vector3(enemy.transform.position.x, transform.position.y, enemy.transform.position.z));
+            animator.SetTrigger("doShot");
+            StopMoving();
+            isAttacking = true;
+        }
+
+        protected void StopMoving()
+        {
+            if (navMeshAgent != null)
+            {
+                navMeshAgent.isStopped = true;
+            }
+        }
+
+        protected void ResumeMoving()
+        {
+            if (navMeshAgent != null)
+            {
+                navMeshAgent.isStopped = false;
+            }
+        }
+
+        public void OnAttackAnimationEnd()
+        {
+            ResumeMoving();
+            isAttacking = false;
         }
     }
 }

@@ -4,35 +4,18 @@ using UnityEngine;
 
 namespace BCC
 {
-    public class Slug : MonoBehaviour
+    public class Slug : PlayerCtrl
     {
-        public Transform bulletPos;
-        public GameObject bullet;
-        public float bulletSpeed = 50f;
-        public float shootDelay = 1f;
+        public GameObject bulletPrefab;
+        public Transform bulletSpawnPoint;
+        public float bulletSpeed = 10f;
+        public float spreadRange = 1;
+
         private bool isShooting = false;
 
-        private SelectableCharacter selectableCharacter;
-
-        private void Awake()
+        public override void Attack()
         {
-            selectableCharacter = GetComponent<SelectableCharacter>();
-        }
-
-        private void Update()
-        {
-            if (Input.GetMouseButtonDown(0))
-            {
-                if (selectableCharacter.IsSelected() && selectableCharacter.GetCurrentTarget() != null)
-                {
-                    Attack();
-                }
-            }
-        }
-
-        private void Attack()
-        {
-            if (!isShooting)
+            if (type == Type.Range)
             {
                 StartCoroutine(ShootBullets());
             }
@@ -41,22 +24,28 @@ namespace BCC
         private IEnumerator ShootBullets()
         {
             isShooting = true;
-            yield return new WaitForSeconds(shootDelay);  // 1초 대기
+            yield return new WaitForSeconds(1f);
 
             for (int i = 0; i < 8; i++)
             {
-                ShootBullet();
+                Vector2 randomCircle = Random.insideUnitCircle * spreadRange;
+                float randomValue = Random.Range(0, spreadRange);
+                Vector3 randomAngle = new Vector3(0, randomValue, 0);
+                ShootBullet(randomAngle);
             }
 
             isShooting = false;
         }
 
-        private void ShootBullet()
+        private void ShootBullet(Vector3 rotation)
         {
-            GameObject instantBullet = Instantiate(bullet, bulletPos.position, bulletPos.rotation); // 총알 발사
-
-            Rigidbody bulletRigid = instantBullet.GetComponent<Rigidbody>();
-            bulletRigid.velocity = bulletPos.forward * bulletSpeed; // 탄속도
+            Quaternion rot = bulletSpawnPoint.rotation * Quaternion.Euler(rotation);
+            GameObject bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, rot);
+            Rigidbody bulletRb = bullet.GetComponent<Rigidbody>();
+            if (bulletRb != null)
+            {
+                bulletRb.AddForce(bullet.transform.forward * bulletSpeed, ForceMode.Impulse);
+            }
         }
     }
 }
