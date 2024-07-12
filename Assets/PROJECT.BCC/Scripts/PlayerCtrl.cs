@@ -86,6 +86,7 @@ namespace BCC
             bulletRigid.velocity = bulletPos.forward * 50;
 
             yield return null;
+
         }
 
         public void SetDestination(Vector3 targetDestination)
@@ -119,7 +120,7 @@ namespace BCC
         {
             if (navMeshAgent != null)
             {
-                navMeshAgent.isStopped = true;
+                navMeshAgent.SetDestination(transform.position);
             }
         }
 
@@ -127,7 +128,7 @@ namespace BCC
         {
             if (navMeshAgent != null)
             {
-                navMeshAgent.isStopped = false;
+                navMeshAgent.SetDestination(transform.position);
             }
         }
 

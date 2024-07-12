@@ -56,6 +56,7 @@ namespace BCC
                 enemyScript.Select();
             }
             playerCtrl.SetTarget(enemy);
+            playerCtrl.Attack();
         }
 
         public void SetDestination(Vector3 targetDestination)
