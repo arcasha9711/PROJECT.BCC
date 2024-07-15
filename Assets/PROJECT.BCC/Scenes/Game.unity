@@ -601,6 +601,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SelectionUI: {fileID: 1274341678}
+  isAlive: 1
 --- !u!1 &278269882
 GameObject:
   m_ObjectHideFlags: 0
@@ -2185,8 +2186,8 @@ MonoBehaviour:
   m_Center: {x: 0, y: 2, z: 0}
   m_LayerMask:
     serializedVersion: 2
-    m_Bits: 1048576
-  m_UseGeometry: 1
+    m_Bits: 1048577
+  m_UseGeometry: 0
   m_DefaultArea: 0
   m_GenerateLinks: 0
   m_IgnoreNavMeshAgent: 1
@@ -2317,7 +2318,8 @@ MonoBehaviour:
   bulletPrefab: {fileID: 6298338120868742626, guid: 43b378dd5ab05ca43ac59b9166de3179, type: 3}
   bulletSpawnPoint: {fileID: 988913788}
   bulletSpeed: 15
-  spreadRange: 20
+  spreadRange: 10
+  shotDelay: 1.2
 --- !u!114 &1628088060
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2548,6 +2550,7 @@ GameObject:
   - component: {fileID: 1716782127}
   - component: {fileID: 1716782128}
   - component: {fileID: 1716782129}
+  - component: {fileID: 1716782131}
   - component: {fileID: 1716782130}
   m_Layer: 21
   m_Name: BCC.Player1(Lifle)
@@ -2649,6 +2652,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <CharacterID>k__BackingField: Player_01
+--- !u!114 &1716782131
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1716782124}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aee3ca668f26f704eb62df06e3f56c53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 0
+  bulletPos: {fileID: 1657460221}
+  bullet: {fileID: 6298338120868742626, guid: 43b378dd5ab05ca43ac59b9166de3179, type: 3}
+  bulletPrefab: {fileID: 6298338120868742626, guid: 43b378dd5ab05ca43ac59b9166de3179, type: 3}
+  bulletSpawnPoint: {fileID: 1657460221}
+  bulletSpeed: 15
+  spreadRange: 0.2
+  shotDelay: 1
 --- !u!1 &1782855413
 GameObject:
   m_ObjectHideFlags: 0
@@ -15452,7 +15475,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!1 &6161480207656693903
 GameObject:

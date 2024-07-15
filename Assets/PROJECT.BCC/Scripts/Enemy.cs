@@ -7,6 +7,7 @@ namespace BCC
     public class Enemy : MonoBehaviour, ISelectable
     {
         public GameObject SelectionUI;
+        public bool isAlive = true;
 
         public GameObject Selection => throw new System.NotImplementedException();
 
@@ -29,6 +30,12 @@ namespace BCC
 
         private void OnDestroy()
         {
+            OnCharacterDead?.Invoke();
+        }
+
+        public void kill()
+        {
+            isAlive = false;
             OnCharacterDead?.Invoke();
         }
     }

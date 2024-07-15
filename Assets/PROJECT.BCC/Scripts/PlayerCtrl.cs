@@ -1,3 +1,4 @@
+using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -99,6 +100,19 @@ namespace BCC
             if (navMeshAgent != null)
             {
                 navMeshAgent.SetDestination(targetDestination);
+            }
+
+            StartCoroutine(InternalLookatFirstCorner());
+            IEnumerator InternalLookatFirstCorner()
+            {
+                yield return new WaitUntil(() => { return navMeshAgent.pathStatus == NavMeshPathStatus.PathComplete; });
+
+                if (navMeshAgent.path.corners.Length >= 1)
+                {
+                    Vector3 firstCornerPosition = navMeshAgent.path.corners[1];
+                    Vector3 dir = firstCornerPosition - transform.position;
+                    transform.forward = dir;
+                }
             }
         }
 
