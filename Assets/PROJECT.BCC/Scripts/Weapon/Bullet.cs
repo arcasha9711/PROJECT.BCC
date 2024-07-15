@@ -8,6 +8,7 @@ namespace BCC
     {
         public int damage;
         public float lifeTime = 3f;
+        
 
         private void Start()
         {
@@ -17,6 +18,11 @@ namespace BCC
         private void OnCollisionEnter(Collision collision)
         {
             Destroy(gameObject);
+        }
+
+        private void Exception()
+        {
+            
         }
     }
 }

@@ -13,7 +13,7 @@ namespace BCC
         public float shotDelay = 1f;
 
         private bool isShooting = false;
-        private int bulletsPerBurst = 30;
+        private int bulletsPerBurst = 15;
 
         public override void Attack()
         {
@@ -35,7 +35,6 @@ namespace BCC
                 yield return new WaitForSeconds(0.1f);
             }
 
-            
             yield return new WaitForSeconds(shotDelay);
             isShooting = false;
         }
