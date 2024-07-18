@@ -9738,6 +9738,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 7
   lifeTime: 3
+  maxDistance: 50
 --- !u!1 &6446217160036402998
 GameObject:
   m_ObjectHideFlags: 0
