@@ -7,7 +7,7 @@ namespace BCC
     public class Bullet : MonoBehaviour
     {
         public int damage;
-        public float lifeTime = 3f;
+        public float lifeTime = 0.3f; // 사거리 처리
         public float maxDistance = 50f;
 
         private Vector3 startPosition;
