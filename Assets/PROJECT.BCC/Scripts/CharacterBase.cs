@@ -38,6 +38,17 @@ namespace BCC
             currentHP -= damage;
 
             OnTakeDamaged?.Invoke(currentHP, maxHP);
+
+            if (currentHP <= 0)
+            {
+                die();
+            }
         }
+
+        private void die()
+        {
+            Destroy(gameObject);
+        }
+
     }
 }
