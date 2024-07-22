@@ -11,7 +11,7 @@ namespace BCC
         public float maxDistance = 50f;
 
         private Vector3 startPosition;
-        
+
 
         private void Start()
         {
@@ -22,7 +22,7 @@ namespace BCC
         private void Update()
         {
             float traveledDistance = Vector3.Distance(startPosition, transform.position);
-            if(traveledDistance >= maxDistance)
+            if (traveledDistance >= maxDistance)
             {
                 Destroy(gameObject);
             }
@@ -31,6 +31,14 @@ namespace BCC
 
         private void OnCollisionEnter(Collision collision)
         {
+            if (collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("Enemy"))
+            {
+                if (collision.gameObject.TryGetComponent(out CharacterBase character))
+                {
+                    character.TakeDamage(damage);
+                }
+            }
+
             Destroy(gameObject);
         }
     }

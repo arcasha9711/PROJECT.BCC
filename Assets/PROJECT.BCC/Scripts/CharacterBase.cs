@@ -10,6 +10,12 @@ namespace BCC
 
         [field: SerializeField] public string CharacterID { get; private set; }
 
+        public float currentHP;
+        public float maxHP;
+
+
+        public System.Action<float, float> OnTakeDamaged;
+
         private void Awake()
         {
             AllCharacters.Add(this);
@@ -18,6 +24,20 @@ namespace BCC
         private void OnDestroy()
         {
             AllCharacters.Remove(this);
+        }
+
+        private void Start()
+        {
+            currentHP = maxHP;
+            CharacterHUDGroupUI.Instance.AddNewHUD(this);
+        }
+
+
+        public void TakeDamage(float damage)
+        {
+            currentHP -= damage;
+
+            OnTakeDamaged?.Invoke(currentHP, maxHP);
         }
     }
 }
