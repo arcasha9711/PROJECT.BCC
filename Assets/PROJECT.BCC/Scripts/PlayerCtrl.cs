@@ -73,10 +73,10 @@ namespace BCC
 
         public virtual void Attack()
         {
-            if (type == Type.Range)
-            {
-                StartCoroutine(Shot());
-            }
+            //if (type == Type.Range)
+            //{
+            //    StartCoroutine(Shot());
+            //}
         }
 
         protected virtual IEnumerator Shot()

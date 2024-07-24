@@ -11,16 +11,53 @@ namespace BCC
         public float bulletSpeed = 20f;
         public float spreadRange = 0.2f;
         public float shotDelay = 1f;
+        public float range = 15f; // 사거리
 
         private bool isShooting = false;
-        private int bulletsPerBurst = 15;
+        private int bulletsPerBurst = 10;
 
         public override void Attack()
         {
             if (type == Type.Range && !isShooting)
             {
-                StartCoroutine(ShootBullets());
+                if (IsTargetInRange())
+                {
+                    StartCoroutine(ShootBullets());
+                }
+                else
+                {
+                    MoveToTarget();
+                }
             }
+        }
+
+        private bool IsTargetInRange()
+        {
+            if (selectableCharacter.GetCurrentTarget() == null)
+                return false;
+
+            return Vector3.Distance(transform.position, selectableCharacter.GetCurrentTarget().transform.position) <= range;
+        }
+
+        private void MoveToTarget()
+        {
+            if (selectableCharacter.GetCurrentTarget() != null)
+            {
+                navMeshAgent.isStopped = false;
+                navMeshAgent.SetDestination(selectableCharacter.GetCurrentTarget().transform.position);
+                StartCoroutine(WaitUntilInRange());
+            }
+        }
+
+        private IEnumerator WaitUntilInRange()
+        {
+            while (!IsTargetInRange())
+            {
+                yield return null;
+            }
+
+            navMeshAgent.isStopped = true; // 사거리 내에 도달하면 이동 멈춤
+            StartCoroutine(ShootBullets());
         }
 
         private IEnumerator ShootBullets()
@@ -29,6 +66,8 @@ namespace BCC
 
             for (int i = 0; i < bulletsPerBurst; i++)
             {
+                if (!IsTargetInRange()) break;
+
                 Vector2 randomCircle = Random.insideUnitCircle * spreadRange;
                 Vector3 randomAngle = new Vector3(randomCircle.x, randomCircle.y, 0);
                 ShootBullet(randomAngle);
@@ -37,6 +76,15 @@ namespace BCC
 
             yield return new WaitForSeconds(shotDelay);
             isShooting = false;
+
+            if (!IsTargetInRange() && selectableCharacter.GetCurrentTarget() != null)
+            {
+                MoveToTarget(); // 타겟을 다시 추적
+            }
+            else
+            {
+                navMeshAgent.isStopped = false; // 이동 재개
+            }
         }
 
         private void ShootBullet(Vector3 rotation)
@@ -46,7 +94,7 @@ namespace BCC
             Rigidbody bulletRb = bullet.GetComponent<Rigidbody>();
             if (bulletRb != null)
             {
-                bulletRb.AddForce(bullet.transform.forward * bulletSpeed, ForceMode.Impulse);
+                bulletRb.velocity = bulletSpawnPoint.forward * bulletSpeed;
             }
         }
     }

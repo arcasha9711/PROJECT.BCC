@@ -9736,8 +9736,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4940f261b8386e14887e0c3e772aa1b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 7
-  lifeTime: 0.4
+  damage: 3
+  lifeTime: 2
   maxDistance: 50
 --- !u!1 &6446217160036402998
 GameObject:

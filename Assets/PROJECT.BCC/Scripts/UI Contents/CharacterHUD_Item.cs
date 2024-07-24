@@ -10,7 +10,7 @@ namespace BCC
         public Image hpBar;
         public Transform target;
 
-        public Vector3 offset;
+        public Vector3 offsetOfViewport;
         private CharacterBase linkedCharacter;
 
         public void SetTarget(CharacterBase character)
@@ -37,8 +37,10 @@ namespace BCC
             if (target == null)
                 return;
 
-            Vector3 targetScreenPoint = Camera.main.WorldToScreenPoint(target.position);
-            Vector3 finalPosition = targetScreenPoint + offset;
+            Vector3 viewportPointOfPivot = Camera.main.WorldToViewportPoint(target.position);
+            Vector3 viewportPosition = viewportPointOfPivot + offsetOfViewport;
+            Vector3 finalPosition = Camera.main.ViewportToScreenPoint(viewportPosition);
+
             transform.position = finalPosition;
         }
     }

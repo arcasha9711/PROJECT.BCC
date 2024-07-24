@@ -32,9 +32,7 @@ namespace BCC
         {
             if (currentTarget != null)
             {
-                // To do : current Target한테 Attack()
-                // To do : 만약에 현재 캐릭터의 총기 딜레이 만큼 기다려줬고 연사가 가능하다면 Attack()
-
+                
                 bool isPossibleAttack = true;
 
                 var enemy = currentTarget.GetComponent<Enemy>();
