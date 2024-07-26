@@ -7298,7 +7298,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <CharacterID>k__BackingField: Player_02
   currentHP: 0
-  maxHP: 0
+  maxHP: 100
 --- !u!114 &1192270653
 MonoBehaviour:
   m_ObjectHideFlags: 0

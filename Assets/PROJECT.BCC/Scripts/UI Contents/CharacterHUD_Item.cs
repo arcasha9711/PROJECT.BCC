@@ -7,6 +7,8 @@ namespace BCC
 {
     public class CharacterHUD_Item : MonoBehaviour
     {
+        public CharacterBase LinkedCharacter => linkedCharacter;
+
         public Image hpBar;
         public Transform target;
 

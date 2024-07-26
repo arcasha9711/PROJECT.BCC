@@ -29,6 +29,15 @@ namespace BCC
             var newHudItem = Instantiate(itemPrefab, transform);
             newHudItem.gameObject.SetActive(true);
             newHudItem.SetTarget(target);
+
+            createdItems.Add(newHudItem);
+        }
+
+        public void RemoveHUD(CharacterBase character)
+        {
+            var targetHUD = createdItems.Find(x => x.LinkedCharacter == character);
+            createdItems.Remove(targetHUD);
+            Destroy(targetHUD.gameObject);
         }
     }
 }

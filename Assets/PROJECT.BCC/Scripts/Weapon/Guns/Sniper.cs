@@ -90,11 +90,11 @@ namespace BCC
         {
             Quaternion rot = bulletSpawnPoint.rotation * Quaternion.Euler(rotation);
             GameObject bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, rot);
-            Rigidbody bulletRb = bullet.GetComponent<Rigidbody>();
-            if (bulletRb != null)
-            {
-                bulletRb.velocity = bulletSpawnPoint.forward * bulletSpeed;
-            }
+            //Rigidbody bulletRb = bullet.GetComponent<Rigidbody>();
+            //if (bulletRb != null)
+            //{
+            //    bulletRb.velocity = bulletSpawnPoint.forward * bulletSpeed;
+            //}
         }
     }
 }

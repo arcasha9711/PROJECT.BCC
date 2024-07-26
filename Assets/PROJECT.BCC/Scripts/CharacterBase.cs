@@ -13,7 +13,6 @@ namespace BCC
         public float currentHP;
         public float maxHP;
 
-
         public System.Action<float, float> OnTakeDamaged;
 
         private void Awake()
@@ -32,23 +31,21 @@ namespace BCC
             CharacterHUDGroupUI.Instance.AddNewHUD(this);
         }
 
-
         public void TakeDamage(float damage)
         {
             currentHP -= damage;
-
             OnTakeDamaged?.Invoke(currentHP, maxHP);
 
             if (currentHP <= 0)
             {
-                die();
+                Die();
             }
         }
 
-        private void die()
+        private void Die()
         {
+            CharacterHUDGroupUI.Instance.RemoveHUD(this);
             Destroy(gameObject);
         }
-
     }
 }

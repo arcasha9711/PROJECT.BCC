@@ -75,17 +75,27 @@ namespace BCC
 
             yield return new WaitForSeconds(shotDelay);
             isShooting = false;
+
+            if (!IsTargetInRange() && selectableCharacter.GetCurrentTarget() != null)
+            {
+                MoveToTarget(); // 타겟을 다시 추적
+            }
+            else
+            {
+                navMeshAgent.isStopped = false; // 이동 재개
+            }
         }
 
         private void ShootBullet(Vector3 rotation)
         {
             Quaternion rot = bulletSpawnPoint.rotation * Quaternion.Euler(rotation);
             GameObject bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, rot);
-            Rigidbody bulletRb = bullet.GetComponent<Rigidbody>();
-            if (bulletRb != null)
-            {
-                bulletRb.velocity = bullet.transform.forward * bulletSpeed;
-            }
+            
+            //Rigidbody bulletRb = bullet.GetComponent<Rigidbody>();
+            //if (bulletRb != null)
+            //{
+            //    bulletRb.velocity = bullet.transform.forward * bulletSpeed;
+            //}
         }
     }
 }
