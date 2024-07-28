@@ -15,21 +15,36 @@ namespace BCC
 
         private bool isShooting = false;
         private int bulletsPerBurst = 8;
+        private float fireRateTime = 0;
 
         public override void Attack()
         {
-            if (type == Type.Range && !isShooting)
+            if (type == Type.Range)
             {
                 if (IsTargetInRange())
                 {
-                    StartCoroutine(ShootBullets());
+                    ShootBullets();
                 }
                 else
                 {
-                    MoveToTarget();
+                    if (selectableCharacter.GetCurrentTarget() != null)
+                    {
+                        MoveToTarget(); // 타겟을 다시 추적
+                    }
+                    else
+                    {
+                        navMeshAgent.isStopped = false; // 이동 재개
+                    }
                 }
             }
         }
+        protected override void Update()
+        {
+            base.Update();
+
+            fireRateTime -= Time.deltaTime;
+        }
+
 
         private bool IsTargetInRange()
         {
@@ -57,33 +72,23 @@ namespace BCC
             }
 
             navMeshAgent.isStopped = true; // 사거리 내에 도달하면 이동 멈춤
-            StartCoroutine(ShootBullets());
+            ShootBullets();
         }
 
-        private IEnumerator ShootBullets()
+        private void ShootBullets()
         {
-            isShooting = true;
+            if (fireRateTime > 0)
+                return;
 
             for (int i = 0; i < bulletsPerBurst; i++)
             {
-                if (!IsTargetInRange()) break;
-
+                
                 Vector2 randomCircle = Random.insideUnitCircle * spreadRange;
                 Vector3 randomAngle = new Vector3(randomCircle.x, randomCircle.y, 0);
                 ShootBullet(randomAngle);
             }
 
-            yield return new WaitForSeconds(shotDelay);
-            isShooting = false;
-
-            if (!IsTargetInRange() && selectableCharacter.GetCurrentTarget() != null)
-            {
-                MoveToTarget(); // 타겟을 다시 추적
-            }
-            else
-            {
-                navMeshAgent.isStopped = false; // 이동 재개
-            }
+            fireRateTime = shotDelay;
         }
 
         private void ShootBullet(Vector3 rotation)

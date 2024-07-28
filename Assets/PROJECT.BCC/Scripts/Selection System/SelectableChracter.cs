@@ -82,7 +82,6 @@ namespace BCC
                 enemyScript.Select();
             }
             playerCtrl.SetTarget(enemy);
-            playerCtrl.Attack();
         }
 
         public void ResetTarget()
