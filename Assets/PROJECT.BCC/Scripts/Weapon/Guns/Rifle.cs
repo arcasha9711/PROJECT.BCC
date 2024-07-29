@@ -13,7 +13,6 @@ namespace BCC
         public float shotDelay = 1f;
         public float range = 15f; // 사거리
 
-        private bool isShooting = false;
         private int bulletsPerBurst = 10;
         private float fireRateTime = 0;
 
@@ -44,6 +43,7 @@ namespace BCC
             base.Update();
 
             fireRateTime -= Time.deltaTime;
+
         }
 
         private bool IsTargetInRange()
@@ -60,41 +60,35 @@ namespace BCC
             {
                 navMeshAgent.isStopped = false;
                 navMeshAgent.SetDestination(selectableCharacter.GetCurrentTarget().transform.position);
-                StartCoroutine(WaitUntilInRange());
             }
         }
 
-        private IEnumerator WaitUntilInRange()
-        {
-            while (!IsTargetInRange())
-            {
-                yield return null;
-            }
-
-            navMeshAgent.isStopped = true; // 사거리 내에 도달하면 이동 멈춤
-            ShootBullets();
-        }
-
-         private void ShootBullets()
+        private void ShootBullets()
         {
             if (fireRateTime > 0)
                 return;
 
+            StartCoroutine(FireCoroutine());
+            fireRateTime = shotDelay;
+        }
+
+        IEnumerator FireCoroutine()
+        {
             for (int i = 0; i < bulletsPerBurst; i++)
             {
-                
                 Vector2 randomCircle = Random.insideUnitCircle * spreadRange;
                 Vector3 randomAngle = new Vector3(randomCircle.x, randomCircle.y, 0);
                 ShootBullet(randomAngle);
-            }
 
-            fireRateTime = shotDelay;
+                yield return new WaitForSeconds(0.1f);
+            }
         }
 
         private void ShootBullet(Vector3 rotation)
         {
             Quaternion rot = bulletSpawnPoint.rotation * Quaternion.Euler(rotation);
             GameObject bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, rot);
+
             //Rigidbody bulletRb = bullet.GetComponent<Rigidbody>();
             //if (bulletRb != null)
             //{

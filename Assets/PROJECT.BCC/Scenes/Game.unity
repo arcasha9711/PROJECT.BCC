@@ -11479,7 +11479,7 @@ MonoBehaviour:
   bulletSpawnPoint: {fileID: 1657460221}
   bulletSpeed: 15
   spreadRange: 0.2
-  shotDelay: 1
+  shotDelay: 2
   range: 7
 --- !u!1 &1723098467
 GameObject:

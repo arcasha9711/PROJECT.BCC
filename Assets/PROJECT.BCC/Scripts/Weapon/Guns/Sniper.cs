@@ -13,7 +13,6 @@ namespace BCC
         public float shotDelay = 2f;
         public float range = 30f; // 사거리
 
-        private bool isShooting = false;
         private int bulletsPerBurst = 1;
         private float fireRateTime = 0;
 
