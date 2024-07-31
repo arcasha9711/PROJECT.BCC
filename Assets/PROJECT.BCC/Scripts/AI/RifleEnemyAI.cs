@@ -15,6 +15,10 @@ namespace BCC
 
         private State _curState;
         private FSM _fsm;
+        public float viewDistance = 10f;  // 플레이어를 감지할 수 있는 거리
+        public float viewAngle = 90f;     // 시야각
+        public LayerMask playerMask;      // 플레이어 레이어 마스크
+        public LayerMask obstacleMask;    // 장애물 체크를 위한 레이어 마스크
 
         private void Start()
         {
@@ -83,15 +87,53 @@ namespace BCC
             }
         }
 
-       /* private bool CanSeePlayer()
+        private bool CanSeePlayer()
         {
-            // TODO:: 플레이어 탐지 구현
+            Collider[] playersInRange = Physics.OverlapSphere(transform.position, viewDistance, playerMask);
+            foreach (Collider playerCollider in playersInRange)
+            {
+                Transform playerTransform = playerCollider.transform;
+                Vector3 directionToPlayer = (playerTransform.position - transform.position).normalized;
+
+                // 플레이어가 시야각 안에 있는지 확인
+                if (Vector3.Angle(transform.forward, directionToPlayer) < viewAngle / 2)
+                {
+                    // 장애물 확인
+                    if (!Physics.Linecast(transform.position, playerTransform.position, obstacleMask))
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
         }
 
         private bool CanAttackPlayer()
         {
-            // TODO:: 사정거리 체크 구현
+            Collider[] playersInRange = Physics.OverlapSphere(transform.position, viewDistance, playerMask);
+            foreach (Collider playerCollider in playersInRange)
+            {
+                float distanceToPlayer = Vector3.Distance(transform.position, playerCollider.transform.position);
+                if (distanceToPlayer < viewDistance)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
-       */
+
+        private void OnDrawGizmosSelected()
+        {
+            // 시야 범위를 표시
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawWireSphere(transform.position, viewDistance);
+
+            Vector3 leftBoundary = Quaternion.Euler(0, -viewAngle / 2, 0) * transform.forward * viewDistance;
+            Vector3 rightBoundary = Quaternion.Euler(0, viewAngle / 2, 0) * transform.forward * viewDistance;
+
+            Gizmos.color = Color.blue;
+            Gizmos.DrawLine(transform.position, transform.position + leftBoundary);
+            Gizmos.DrawLine(transform.position, transform.position + rightBoundary);
+        }
     }
 }
