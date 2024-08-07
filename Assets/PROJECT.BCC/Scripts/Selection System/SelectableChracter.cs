@@ -92,6 +92,7 @@ namespace BCC
         public void SetDestination(Vector3 targetDestination)
         {
             playerCtrl.SetDestination(targetDestination);
+            playerCtrl.StopAttack();
             ResetTarget();
         }
 

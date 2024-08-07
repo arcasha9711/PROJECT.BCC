@@ -16,6 +16,8 @@ namespace BCC
         private int bulletsPerBurst = 10;
         private float fireRateTime = 0;
 
+        private IEnumerator fireCoroutine = null;
+
         public override void Attack()
         {
             if (type == Type.Range)
@@ -43,7 +45,6 @@ namespace BCC
             base.Update();
 
             fireRateTime -= Time.deltaTime;
-
         }
 
         private bool IsTargetInRange()
@@ -63,12 +64,26 @@ namespace BCC
             }
         }
 
+        public override void StopAttack()
+        {
+            if (fireCoroutine != null)
+            {
+                StopCoroutine(fireCoroutine);
+            }
+        }
+
         private void ShootBullets()
         {
             if (fireRateTime > 0)
                 return;
 
-            StartCoroutine(FireCoroutine());
+            if (fireCoroutine != null)
+            {
+                StopCoroutine(fireCoroutine);
+            }
+
+            fireCoroutine = FireCoroutine();
+            StartCoroutine(fireCoroutine);
             fireRateTime = shotDelay;
         }
 

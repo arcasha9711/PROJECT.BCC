@@ -4,8 +4,8 @@ using UnityEngine;
 
 namespace BCC
 {
-    public class RifleEnemyAI : MonoBehaviour
+    public class SlugEnemyAI : MonoBehaviour
     {
-        
+       
     }
 }

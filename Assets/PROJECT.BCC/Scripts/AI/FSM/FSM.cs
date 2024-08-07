@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace BCC
 {
-    public class FSM : MonoBehaviour
+    public class FSM
     {
         public FSM(BaseState initState)
         {

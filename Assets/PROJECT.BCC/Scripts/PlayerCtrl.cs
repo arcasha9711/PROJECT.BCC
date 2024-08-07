@@ -27,13 +27,13 @@ namespace BCC
 
         protected virtual void Update()
         {
-            if (Input.GetMouseButtonDown(0))
+            /*if (Input.GetMouseButtonDown(0))
             {
                 if (selectableCharacter.IsSelected() && selectableCharacter.GetCurrentTarget() != null)
                 {
                     Attack();
                 }
-            }
+            }*/
 
             HandleMovement();
         }
@@ -77,6 +77,11 @@ namespace BCC
             //{
             //    StartCoroutine(Shot());
             //}
+        }
+
+        public virtual void StopAttack()
+        {
+
         }
 
         protected virtual IEnumerator Shot()
